@@ -10,7 +10,15 @@ body {
 .heading-text {
     color: #dbb9f9;
     font-weight: 200;
-    font-size: 5em;
+    font-size: 92pt;
+}
+
+.stock-items {
+    margin-left: 5%;
+}
+
+.stock-item {
+    border-bottom: 1px solid #655e72;
 }
 
 .stock-quantity {
@@ -26,7 +34,7 @@ body {
     background: #211d23;
     color: #dbb9f9;
     box-shadow: 0 2px 3px 3px #2d2d30;
-
+    font-size: 31.15pt;
 }
 
 .order-details {
@@ -35,6 +43,7 @@ body {
 
 .order-ingredient-item {
     color: #807d89;
+    font-size: 16.57pt;
 }
 
 .drink-count {

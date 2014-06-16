@@ -3,7 +3,7 @@
 </div>
 <div class="row">
     <div class="col-md-4 col-md-offset-4" ng-repeat="drinkOrdered in drinksOrdered">
-		<span class="ordered-drink-count" ng-bind="drinkOrdered[$index].quantity || '-'"></span><span class="order-drink-name">{{drinkOrdered.name}}</span>
+		<span class="ordered-drink-count" ng-bind="drinkOrdered.quantity || '-'"></span><span class="order-drink-name">{{drinkOrdered.name}}</span>
     </div>
 </div>
 <div class="row">

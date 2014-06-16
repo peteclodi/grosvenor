@@ -2,24 +2,24 @@
     Bar Stock
 </div>
 <div class="row">
-    <div class="col-sm-3">
-        <div class="row" ng-repeat="liquor in stock | filter:'liquor'">
-            <span class="col-sm-9">{{liquor.name}}</span><span class="col-sm-3"><span class="stock-quantity stock-available-qty">{{getAvailableQty(liquor)}}</span><span class="stock-measure">{{liquor.measure}}</span></span>
+    <div class="col-sm-2 stock-items">
+        <div class="row" ng-repeat="liquor in stock | filter:'liquor'" ng-class="{'stock-item': !$last}">
+            <span class="col-sm-9">{{liquor.name}}</span><span class="col-sm-2"><span class="stock-quantity stock-available-qty">{{getAvailableQty(liquor)}}</span><span class="stock-measure">{{liquor.measure}}</span></span>
         </div>
     </div>
-    <div class="col-sm-3">
-        <div ng-repeat="mixer in stock | filter:'mixer'">
-            <span class="col-sm-9">{{mixer.name}}</span><span class="col-sm-3"><span class="stock-quantity stock-available-qty">{{getAvailableQty(mixer)}}</span><span class="stock-measure">{{mixer.measure}}</span></span>
+    <div class="col-sm-2 stock-items">
+        <div class="row" ng-repeat="mixer in stock | filter:'mixer'" ng-class="{'stock-item': !$last}">
+            <span class="col-sm-9">{{mixer.name}}</span><span class="col-sm-2"><span class="stock-quantity stock-available-qty">{{getAvailableQty(mixer)}}</span><span class="stock-measure">{{mixer.measure}}</span></span>
         </div>
     </div>
-    <div class="col-sm-3">
-        <div ng-repeat="juice in stock | filter:'juice'">
-            <span class="col-sm-9">{{juice.name}}</span><span class="col-sm-3"><span class="stock-quantity stock-available-qty">{{getAvailableQty(juice)}}</span><span class="stock-measure">{{juice.measure}}</span></span>
+    <div class="col-sm-2 stock-items">
+        <div class="row" ng-repeat="juice in stock | filter:'juice'" ng-class="{'stock-item': !$last}">
+            <span class="col-sm-9">{{juice.name}}</span><span class="col-sm-2"><span class="stock-quantity stock-available-qty">{{getAvailableQty(juice)}}</span><span class="stock-measure">{{juice.measure}}</span></span>
         </div>
     </div>
-    <div class="col-sm-3">
-        <div ng-repeat="garnish in stock | filter:'garnish'">
-            <span class="col-sm-9">{{garnish.name}}</span><span class="col-sm-3"><span class="stock-quantity stock-available-qty">{{getAvailableQty(garnish)}}</span></span>
+    <div class="col-sm-2 stock-items">
+        <div class="row" ng-repeat="garnish in stock | filter:'garnish'" ng-class="{'stock-item': !$last}">
+            <span class="col-sm-9">{{garnish.name}}</span><span class="col-sm-2"><span class="stock-quantity stock-available-qty">{{getAvailableQty(garnish)}}</span></span>
         </div>
     </div>
 </div>

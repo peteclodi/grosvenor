@@ -51,9 +51,16 @@ angular.module('grosvenorApp')
         ];
 
         $scope.drinksOrdered = DrinksOrdered;
-        angular.forEach($scope.drinks, function(drink){
-            $scope.drinksOrdered.push({name: drink.name, quantity: 0});
-        });
+
+		function initializeDrinksOrder(){
+			for(var index = 0; index < $scope.drinks.length; ++index){
+				$scope.drinksOrdered[index] = ({name: $scope.drinks[index].name, quantity: 0});
+			}
+		}
+
+		if($scope.drinksOrdered.length === 0){
+			initializeDrinksOrder();
+		}
 
         $scope.getIngredientName = function(stockId){
             switch(stockId){
