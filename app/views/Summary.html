@@ -1,14 +1,14 @@
-<div class="row text-center heading-text">
-    Summary
+<div class="row heading-text">
+    <span class="col-sm-4 col-sm-offset-4">Summary</span>
 </div>
 <div class="row">
-    <div class="col-md-4 col-md-offset-4" ng-repeat="drinkOrdered in drinksOrdered">
-		<span class="ordered-drink-count" ng-bind="drinkOrdered.quantity || '-'"></span><span class="order-drink-name">{{drinkOrdered.name}}</span>
+    <div class="col-sm-5 col-sm-offset-4" ng-repeat="drinkOrdered in drinksOrdered">
+		<span class="ordered-drink-count" ng-bind="drinkOrdered.quantity || '-'"></span><span class="pull-right text-left ordered-drink-name">{{drinkOrdered.name}}</span>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-sm-5 col-sm-offset-4">
         <hr>
-        <span class="ordered-drink-count" ng-bind="totalDrinksOrdered() || '-'"></span><span>Total</span>
+        <span class="ordered-drink-count" ng-bind="totalDrinksOrdered() || '-'"></span><span class="pull-right text-left ordered-drink-name ordered-drink-total">Total</span>
     </div>
 </div>

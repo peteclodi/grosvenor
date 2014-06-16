@@ -28,15 +28,15 @@
     Orders
 </div>
 <div class="row">
-    <div class="col-sm-2" ng-repeat="drink in drinks">
+    <div class="col-lg-2" ng-repeat="drink in drinks">
         <span class="order-title text-center">{{drink.name}}</span>
 		<div class="order-details">
 			<div class="row" ng-repeat="ingredient in drink.ingredients">
-				<span class="order-ingredient-item"><span class="col-sm-3 stock-quantity">{{ingredient.qty}}<span class="stock-measure">{{ingredient.measure}}</span></span><span class="col-sm-9">{{getIngredientName(ingredient.stockId)}}</span></span>
+				<span class="order-ingredient-item"><span class="col-lg-3 stock-quantity">{{ingredient.qty}}<span class="stock-measure">{{ingredient.measure}}</span></span><span class="col-lg-9">{{getIngredientName(ingredient.stockId)}}</span></span>
 			</div>
-			<img src="images/plus.png" ng-click="increaseDrinkCount($index, drink)" ng-class="{disabled: ingredientsOutOfStock(drink)}">
+			<img src="images/plus.png" class="order-button" ng-click="increaseDrinkCount($index, drink)" ng-class="{disabled: ingredientsOutOfStock(drink)}">
 			<span class="drink-count" ng-bind="drinksOrdered[$index].quantity || '-'"></span>
-			<img src="images/minus.png" ng-click="decreaseDrinkCount($index, drink)" ng-class="{disabled: drinksOrdered[$index].quantity === 0}">
+			<img src="images/minus.png" class="order-button" ng-click="decreaseDrinkCount($index, drink)" ng-class="{disabled: drinksOrdered[$index].quantity === 0}">
 		</div>
     </div>
 </div>

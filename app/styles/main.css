@@ -11,6 +11,7 @@ body {
     color: #dbb9f9;
     font-weight: 200;
     font-size: 92pt;
+    margin-bottom: 25px;
 }
 
 .stock-items {
@@ -46,6 +47,11 @@ body {
     font-size: 16.57pt;
 }
 
+.order-button{
+    width: 64px;
+    height: 64px;
+}
+
 .drink-count {
     background-color: #ecf0f1;
     color: #37373a;
@@ -68,8 +74,14 @@ body {
 
 .ordered-drink-count {
     color: #ffffff;
+    font-size: 37.09pt;
 }
 
 .ordered-drink-name {
     color: #c3a1db;
+    font-size: 37.09pt;
+}
+
+.ordered-drink-total {
+    font-weight: bold;
 }

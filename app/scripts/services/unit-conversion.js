@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('grosvenorApp')
-	.service('UnitConversion', function(){
+	.factory('UnitConversion', function(){
 		return function(){
-
-			function convert(value, from, to) {
+			this.convert = function(value, from, to) {
 				switch(from) {
 					case 'OZ':
 						switch(to){
@@ -26,22 +25,22 @@ angular.module('grosvenorApp')
 						break;
 				}
 				return NaN;
-			}
+			};
 
 			function ouncesToML(ounces) {
-				return ounces / 0.0338140225589;
+				return Math.floor(ounces / 0.0338140225589);
 			}
 
 			function mlToOunces(ml) {
-				return ml * 0.0338140225589;
+				return Math.floor(ml * 0.0338140225589);
 			}
 
 			function mlToLiter(ml) {
-				return ml * 1000;
+				return +(parseFloat(Math.round((ml / 1000) * 100) / 100).toFixed(2));
 			}
 
 			function literToML(liter) {
-				return liter / 1000;
+				return liter * 1000;
 			}
 		};
 	});

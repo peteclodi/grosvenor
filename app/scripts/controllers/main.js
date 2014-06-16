@@ -47,6 +47,7 @@ angular.module('grosvenorApp')
         ];
 
         $scope.drinksOrdered = DrinksOrdered;
+        var unitConversion = new UnitConversion();
 
 		function initializeDrinksOrder(){
 			for(var index = 0; index < $scope.drinks.length; ++index){
@@ -80,7 +81,7 @@ angular.module('grosvenorApp')
 			angular.forEach(drink.ingredients, function(ingredient){
 				var stockItem = $scope.stock.filter(function(stockItem){ return stockItem.stockId === ingredient.stockId; })[0];
 				var normalizedRequiredQty = ((ingredient.measure && stockItem.measure) ?
-					UnitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
+                    unitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
 				if($scope.getAvailableQty(stockItem) < normalizedRequiredQty){
 					return true;
 				}
@@ -94,7 +95,7 @@ angular.module('grosvenorApp')
 				var stockItem = $scope.stock.filter(function(stockItem){ return stockItem.stockId === ingredient.stockId; })[0];
 				stockItem.usedQty =
 					(stockItem.usedQty || 0) + ((ingredient.measure && stockItem.measure) ?
-						UnitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
+                        unitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
 			});
         };
 
@@ -103,7 +104,7 @@ angular.module('grosvenorApp')
 			angular.forEach(drink.ingredients, function(ingredient){
 				var stockItem = $scope.stock.filter(function(stockItem){ return stockItem.stockId === ingredient.stockId; })[0];
 				stockItem.usedQty -= ((ingredient.measure && stockItem.measure) ?
-					UnitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
+                    unitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
 			});
         };
     });
