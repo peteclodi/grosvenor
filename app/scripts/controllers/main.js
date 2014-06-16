@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('grosvenorApp')
-    .controller('MainCtrl', function ($scope, DrinksOrdered) {
+    .controller('MainCtrl', function ($scope, DrinksOrdered, UnitConversion) {
         $scope.stock = [
             {stockId: 0, name: 'Vodka', initialQty: 750, measure: 'ML', type: 'liquor'},
             {stockId: 1, name: 'Gin', initialQty: 1.5, measure: 'L', type: 'liquor'},
@@ -12,15 +12,11 @@ angular.module('grosvenorApp')
             {stockId: 6, name: 'Bloody Mary Mix', initialQty: 2, measure: 'L', type: 'mixer'},
             {stockId: 7, name: 'Agave Nectar', initialQty: 24, measure: 'OZ', type: 'juice'},
             {stockId: 8, name: 'Orange Juice', initialQty: 48, measure: 'OZ', type: 'juice'},
-            {stockId: 9, name: 'Limes', initialQty: 36, measure: '', type: 'juice'},
+            {stockId: 9, name: 'Limes', initialQty: 36, type: 'juice'},
             {stockId: 10, name: 'Cherries', initialQty: 9, type: 'garnish'},
             {stockId: 11, name: 'Celery Stalks', initialQty: 16, type: 'garnish'},
             {stockId: 12, name: 'Olives', initialQty: 24, type: 'garnish'}
         ];
-
-        $scope.getAvailableQty = function(stockItem){
-            return stockItem.initialQty - (stockItem.usedQty || 0);
-        };
 
         $scope.drinks = [
             {name: 'Bloody Mary', ingredients:[
@@ -62,6 +58,10 @@ angular.module('grosvenorApp')
 			initializeDrinksOrder();
 		}
 
+		$scope.getAvailableQty = function(stockItem){
+			return stockItem.initialQty - (stockItem.usedQty || 0);
+		};
+
         $scope.getIngredientName = function(stockId){
             switch(stockId){
                 case 9:
@@ -78,16 +78,21 @@ angular.module('grosvenorApp')
 
         $scope.increaseDrinkCount = function(index, drink){
             $scope.drinksOrdered[index].quantity++;
-            updateBarStock();
+			angular.forEach(drink.ingredients, function(ingredient){
+				var stockItem = $scope.stock.filter(function(stockItem){ return stockItem.stockId === ingredient.stockId; })[0];
+				stockItem.usedQty =
+					(stockItem.usedQty || 0) + ((ingredient.measure && stockItem.measure) ?
+						UnitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
+			});
         };
 
 
         $scope.decreaseDrinkCount = function(index, drink){
             $scope.drinksOrdered[index].quantity--;
-            updateBarStock();
+			angular.forEach(drink.ingredients, function(ingredient){
+				var stockItem = $scope.stock.filter(function(stockItem){ return stockItem.stockId === ingredient.stockId; })[0];
+				stockItem.usedQty -= ((ingredient.measure && stockItem.measure) ?
+					UnitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
+			});
         };
-
-        function updateBarStock(){
-
-        }
     });
