@@ -1,24 +1,45 @@
 /* Space out content a bit */
 body {
     background: #000000;
-    color: #ffffff;
+    color: #c3a1db;
     font-family: "Source Sans Pro" sans-serif;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
 .heading-text {
+    color: #dbb9f9;
     font-weight: 200;
     font-size: 5em;
 }
 
+.stock-quantity {
+    color: #ffffff;
+}
+
 .stock-measure {
+    color: #90819b;
     font-weight: 700;
 }
 
+.order-title {
+    background: #211d23;
+    color: #dbb9f9;
+    box-shadow: 0 2px 3px 3px #2d2d30;
+
+}
+
+.order-details {
+    background: #37373a;
+}
+
+.order-ingredient-item {
+    color: #807d89;
+}
+
 .drink-count {
-    background-color: #f7f7f9;
-    color: #000000;
+    background-color: #ecf0f1;
+    color: #37373a;
     border-radius: 3px;
     display: inline-block;
     overflow: hidden;
@@ -30,8 +51,16 @@ body {
 }
 
 .order-place-order-button {
-    background: #ff00ff;
+    background: #9b59b6;
     color: #ffffff;
     margin-top: 15px;
     text-align: center;
+}
+
+.ordered-drink-count {
+    color: #ffffff;
+}
+
+.ordered-drink-name {
+    color: #c3a1db;
 }
