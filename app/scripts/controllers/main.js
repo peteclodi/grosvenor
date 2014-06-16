@@ -76,7 +76,19 @@ angular.module('grosvenorApp')
             return $scope.stock.filter(function(stockItem) { return stockItem.stockId === stockId; })[0].name;
         };
 
-        $scope.increaseDrinkCount = function(index, drink){
+		$scope.ingredientsOutOfStock = function(drink) {
+			angular.forEach(drink.ingredients, function(ingredient){
+				var stockItem = $scope.stock.filter(function(stockItem){ return stockItem.stockId === ingredient.stockId; })[0];
+				var normalizedRequiredQty = ((ingredient.measure && stockItem.measure) ?
+					UnitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
+				if($scope.getAvailableQty(stockItem) < normalizedRequiredQty){
+					return true;
+				}
+			});
+			return false;
+		};
+
+        $scope.increaseDrinkCount = function(index, drink) {
             $scope.drinksOrdered[index].quantity++;
 			angular.forEach(drink.ingredients, function(ingredient){
 				var stockItem = $scope.stock.filter(function(stockItem){ return stockItem.stockId === ingredient.stockId; })[0];
@@ -86,8 +98,7 @@ angular.module('grosvenorApp')
 			});
         };
 
-
-        $scope.decreaseDrinkCount = function(index, drink){
+        $scope.decreaseDrinkCount = function(index, drink) {
             $scope.drinksOrdered[index].quantity--;
 			angular.forEach(drink.ingredients, function(ingredient){
 				var stockItem = $scope.stock.filter(function(stockItem){ return stockItem.stockId === ingredient.stockId; })[0];
