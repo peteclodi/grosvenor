@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="drink-count-container">
-                <a class="order-button" ng-class="{disabled: ingredientsOutOfStock(drink)}" ng-click="increaseDrinkCount($index, drink)"><img src="images/plus.png" class="order-button-plus"></a>
+                <a class="order-button" ng-class="{disabled: drink.unavailable}" ng-click="increaseDrinkCount($index, drink)"><img src="images/plus.png" class="order-button-plus"></a>
                 <span class="drink-count" ng-bind="drinksOrdered[$index].quantity || '-'"></span>
                 <a class="order-button" ng-class="{disabled: drinksOrdered[$index].quantity === 0}" ng-click="decreaseDrinkCount($index, drink)"><img src="images/minus.png" class="order-button-minus"></a>
             </div>

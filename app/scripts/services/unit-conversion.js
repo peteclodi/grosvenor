@@ -4,6 +4,8 @@ angular.module('grosvenorApp')
 	.factory('UnitConversion', function(){
 		return function(){
 			this.convert = function(value, from, to) {
+                if(angular.equals(from, to)){ return value; }
+
 				switch(from) {
 					case 'OZ':
 						switch(to){

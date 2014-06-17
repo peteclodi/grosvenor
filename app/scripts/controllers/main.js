@@ -78,20 +78,6 @@ angular.module('grosvenorApp')
             return $scope.stock.filter(function(stockItem) { return stockItem.stockId === stockId; })[0].name;
         };
 
-		$scope.ingredientsOutOfStock = function(drink) {
-            var outOfStock = false;
-            angular.forEach(drink.ingredients, function(ingredient){
-				var stockItem = $scope.stock.filter(function(stockItem){ return stockItem.stockId === ingredient.stockId; })[0];
-				var normalizedRequiredQty = ((ingredient.measure && stockItem.measure) ?
-                    unitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
-				if($scope.getAvailableQty(stockItem) < normalizedRequiredQty){
-                    outOfStock = true;
-                    return;
-				}
-			});
-			return outOfStock;
-		};
-
         $scope.increaseDrinkCount = function(index, drink) {
             $scope.drinksOrdered[index].quantity++;
 			angular.forEach(drink.ingredients, function(ingredient){
@@ -100,6 +86,7 @@ angular.module('grosvenorApp')
 					(stockItem.usedQty || 0) + ((ingredient.measure && stockItem.measure) ?
                         unitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
 			});
+            updateDrinkAvailability();
         };
 
         $scope.decreaseDrinkCount = function(index, drink) {
@@ -109,5 +96,21 @@ angular.module('grosvenorApp')
 				stockItem.usedQty -= ((ingredient.measure && stockItem.measure) ?
                     unitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
 			});
+            updateDrinkAvailability();
         };
+
+        function updateDrinkAvailability() {
+            angular.forEach($scope.drinks, function(drink) {
+                drink.unavailable = false;
+                angular.forEach(drink.ingredients, function(ingredient) {
+                    var stockItem = $scope.stock.filter(function(stockItem){ return stockItem.stockId === ingredient.stockId; })[0];
+                    var normalizedRequiredQty = ((ingredient.measure && stockItem.measure) ?
+                        unitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
+                    if($scope.getAvailableQty(stockItem) < normalizedRequiredQty){
+                        drink.unavailable = true;
+                        return;
+                    }
+                });
+            });
+        }
     });

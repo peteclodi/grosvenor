@@ -86,8 +86,8 @@ body {
 .order-button.disabled {
     pointer-events: none;
     cursor: not-allowed;
-    opacity: 0.65;
-    filter: alpha(opacity=65);
+    opacity: 0.5;
+    filter: alpha(opacity=50);
     box-shadow: none;
 }
 
