@@ -1,9 +1,10 @@
 <div class="row heading-text">
     <span class="col-md-12 col-sm-12 col-xs-12 text-center">Bar Stock</span>
 </div>
+
 <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12 stock-items">
-        <div class="row stock-item" ng-repeat="stockItem in stock" ng-class="{'stock-item-bordered': !$last}">
+    <div class="col-md-3 col-sm-6 col-xs-12 stock-items" ng-repeat="filterItems in filteredItemGroups">
+        <div class="row stock-item" ng-repeat="stockItem in filterItems" ng-class="{'stock-item-bordered': !$last}">
             <span class="col-md-8 col-sm-8 col-xs-8">{{stockItem.name}}</span>
             <span class="col-md-4 col-sm-4 col-xs-4 pull-right">
                 <span class="stock-quantity stock-available-qty">{{getAvailableQty(stockItem)}}</span>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('grosvenorApp')
-    .controller('MainCtrl', function ($scope, $filter, DrinksOrdered, UnitConversion) {
+    .controller('MainCtrl', function ($scope, $filter, $window, DrinksOrdered, UnitConversion) {
         $scope.stock = [
             {stockId: 0, name: 'Vodka', initialQty: 750, measure: 'ML', type: 'liquor'},
             {stockId: 1, name: 'Gin', initialQty: 1.5, measure: 'L', type: 'liquor'},
@@ -46,6 +46,31 @@ angular.module('grosvenorApp')
             ]}
         ];
 
+        $scope.filteredItemGroups = [];
+        var filterList = ['liquor, mixer, juice, garnish'];
+        if($window.innerWidth > 769) {
+            filterList = ['liquor', 'mixer', 'juice', 'garnish'];
+        }
+        else if($window.innerWidth > 321) {
+            filterList = ['liquor, mixer', 'juice, garnish'];
+        }
+
+        angular.forEach(filterList, function(filterString){
+            var filteredItems = getFilteredStockItems(filterString);
+            if(filteredItems.length > 0){
+                $scope.filteredItemGroups.push(filteredItems);
+            }
+        });
+
+        function getFilteredStockItems(filters) {
+            var filterStrings = filters.split(', ');
+            var filteredStockItems = [];
+            angular.forEach(filterStrings, function(filterString) {
+                filteredStockItems = filteredStockItems.concat($scope.stock.filter(function(stockItem) { return stockItem.type === filterString; }));
+            });
+            return filteredStockItems;
+        }
+
         $scope.drinksOrdered = DrinksOrdered;
         var unitConversion = new UnitConversion();
 
@@ -61,7 +86,7 @@ angular.module('grosvenorApp')
 
 		$scope.getAvailableQty = function(stockItem){
             var availableQty = stockItem.initialQty - (stockItem.usedQty || 0);
-			return stockItem.measure === 'L' ? $filter('number')(availableQty, 2) : availableQty;
+			return stockItem.measure === 'L' && (availableQty % 1 !== 0) ? $filter('number')(availableQty, 1) : availableQty;
 		};
 
         $scope.getIngredientName = function(stockId){
