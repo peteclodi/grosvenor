@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('grosvenorApp')
-    .controller('MainCtrl', function ($scope, DrinksOrdered, UnitConversion) {
+    .controller('MainCtrl', function ($scope, $filter, DrinksOrdered, UnitConversion) {
         $scope.stock = [
             {stockId: 0, name: 'Vodka', initialQty: 750, measure: 'ML', type: 'liquor'},
             {stockId: 1, name: 'Gin', initialQty: 1.5, measure: 'L', type: 'liquor'},
@@ -60,7 +60,8 @@ angular.module('grosvenorApp')
 		}
 
 		$scope.getAvailableQty = function(stockItem){
-			return stockItem.initialQty - (stockItem.usedQty || 0);
+            var availableQty = stockItem.initialQty - (stockItem.usedQty || 0);
+			return stockItem.measure === 'L' ? $filter('number')(availableQty, 2) : availableQty;
 		};
 
         $scope.getIngredientName = function(stockId){
