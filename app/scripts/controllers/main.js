@@ -78,15 +78,17 @@ angular.module('grosvenorApp')
         };
 
 		$scope.ingredientsOutOfStock = function(drink) {
-			angular.forEach(drink.ingredients, function(ingredient){
+            var outOfStock = false;
+            angular.forEach(drink.ingredients, function(ingredient){
 				var stockItem = $scope.stock.filter(function(stockItem){ return stockItem.stockId === ingredient.stockId; })[0];
 				var normalizedRequiredQty = ((ingredient.measure && stockItem.measure) ?
                     unitConversion.convert(ingredient.qty, ingredient.measure, stockItem.measure) : ingredient.qty);
 				if($scope.getAvailableQty(stockItem) < normalizedRequiredQty){
-					return true;
+                    outOfStock = true;
+                    return;
 				}
 			});
-			return false;
+			return outOfStock;
 		};
 
         $scope.increaseDrinkCount = function(index, drink) {
