@@ -75,6 +75,10 @@ body {
     font-weight: 700;
 }
 
+.order-ingredient-measure-blank {
+    margin-right: 13px;
+}
+
 .order-button {
     cursor: pointer;
 }
@@ -230,7 +234,7 @@ body {
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 320px) {
+@media screen and (min-width: 321px) {
     .heading-text {
         font-size: 64px;
     }
@@ -314,7 +318,7 @@ body {
 }
 
 /* Responsive: Desktops and up */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
     .heading-text {
         font-size: 92px;
     }

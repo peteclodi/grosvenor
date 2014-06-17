@@ -3,23 +3,12 @@
 </div>
 <div class="row">
     <div class="col-md-3 col-sm-6 col-xs-12 stock-items">
-        <div class="row stock-item" ng-repeat="liquor in stock | filter:'liquor'" ng-class="{'stock-item-bordered': !$last}">
-            <span class="col-md-8 col-sm-8 col-xs-8">{{liquor.name}}</span><span class="col-md-4 col-sm-4 col-xs-4 pull-right"><span class="stock-quantity stock-available-qty">{{getAvailableQty(liquor)}}</span><span class="stock-measure"> {{liquor.measure}}</span></span>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-xs-12  stock-items">
-        <div class="row stock-item" ng-repeat="mixer in stock | filter:'mixer'" ng-class="{'stock-item-bordered': !$last}">
-            <span class="col-md-8 col-sm-8 col-xs-8">{{mixer.name}}</span><span class="col-md-4 col-sm-4 col-xs-4 pull-right"><span class="stock-quantity stock-available-qty">{{getAvailableQty(mixer)}}</span><span class="stock-measure"> {{mixer.measure}}</span></span>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-xs-12  stock-items">
-        <div class="row stock-item" ng-repeat="juice in stock | filter:'juice'" ng-class="{'stock-item-bordered': !$last}">
-            <span class="col-md-8 col-sm-8 col-xs-8">{{juice.name}}</span><span class="col-md-4 col-sm-4 col-xs-4 pull-right"><span class="stock-quantity stock-available-qty">{{getAvailableQty(juice)}}</span><span class="stock-measure"> {{juice.measure}}</span></span>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-xs-12  stock-items">
-        <div class="row stock-item" ng-repeat="garnish in stock | filter:'garnish'" ng-class="{'stock-item-bordered': !$last}">
-            <span class="col-md-8 col-sm-8 col-xs-8">{{garnish.name}}</span><span class="col-md-4 col-sm-4 col-xs-4 pull-right stock-quantity stock-available-qty">{{getAvailableQty(garnish)}}</span>
+        <div class="row stock-item" ng-repeat="stockItem in stock" ng-class="{'stock-item-bordered': !$last}">
+            <span class="col-md-8 col-sm-8 col-xs-8">{{stockItem.name}}</span>
+            <span class="col-md-4 col-sm-4 col-xs-4 pull-right">
+                <span class="stock-quantity stock-available-qty">{{getAvailableQty(stockItem)}}</span>
+                <span class="stock-measure"> {{stockItem.measure}}</span>
+            </span>
         </div>
     </div>
 </div>
@@ -34,7 +23,7 @@
             <div class="order-ingredients-container">
                 <div ng-repeat="ingredient in drink.ingredients">
                     <span class="order-ingredient-item">
-                        <span class="order-ingredient-quantity">{{ingredient.qty}}<span class="order-ingredient-measure"> {{ingredient.measure}}</span></span>
+                        <span class="order-ingredient-quantity">{{ingredient.qty}}<span class="order-ingredient-measure" ng-class="{'order-ingredient-measure-blank': !ingredient.measure}"> {{ingredient.measure}}</span></span>
                         <span class="order-ingredient-name">{{getIngredientName(ingredient.stockId)}}</span>
                     </span>
                 </div>
